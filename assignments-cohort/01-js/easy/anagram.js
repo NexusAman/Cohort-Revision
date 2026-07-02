@@ -5,7 +5,29 @@
 */
 
 function isAnagram(str1, str2) {
+  if(str1.length != str2.length) {
+    return false;
+  }
+  
+  str1 = str1.toLowerCase();
+  str2 = str2.toLowerCase();
+  
+  const mpp = {};
 
+  // count characters from str1
+  for(let ch of str1){
+    mpp[ch] = (mpp[ch] || 0) + 1;
+  }
+
+  // remove characters using str2
+  for(let ch of str2){
+    if(!mpp[ch]){
+      return false;
+    }
+    mpp[ch]--;
+  }
+
+  return true;
 }
 
 module.exports = isAnagram;
