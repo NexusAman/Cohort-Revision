@@ -16,6 +16,58 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
+class Calculator {
+  constructor() {
+    this.result = 0;
+  }
+
+  add(num) {
+    this.result += num;
+  }
+
+  subtract(num) {
+    this.result -= num;
+  }
+
+  multiply(num) {
+    this.result *= num;
+  }
+
+  divide(num) {
+    if (num == 0) {
+      throw new Error("Cannot divide by zero");
+    }
+    this.result /= num;
+  }
+
+  clear() {
+    this.result = 0;
+  }
+
+  getResult() {
+    return this.result;
+  }
+
+  calculate(str) {
+    str = str.replace(/\s+/g, "");
+
+    if (/[^0-9+\-*/().]/.test(str)) {
+      throw new Error("Invalid Expression");
+    }
+
+    const answer = Function(`return ${str}`)();
+
+    if (!Number.isFinite(answer)) {
+      throw new Error("Division by zero");
+    }
+
+    this.result = answer;
+    return this.result;
+  }
+}
+
+const calc = new Calculator();
+calc.calculate("10+5-1*(5 - 1)");
+console.log(calc.getResult());
 
 module.exports = Calculator;
