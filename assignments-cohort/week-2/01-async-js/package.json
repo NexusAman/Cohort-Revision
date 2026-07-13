@@ -10,6 +10,7 @@
     "4-promise-chain": "npx jest ./tests/4-promise-chain.test.js",
     "all": "npx jest ./tests/"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
