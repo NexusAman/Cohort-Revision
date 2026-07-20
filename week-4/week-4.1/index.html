@@ -6,18 +6,35 @@
     <title>Calculator</title>
   </head>
   <body>
-    <input type="number" placeholder="First number" id="firstNumber" />
+    <input
+      type="number"
+      placeholder="First number"
+      id="firstNumber"
+      onchange="debouncedPopulateDiv()"
+    />
     <br />
     <br />
-    <input type="number" placeholder="Second number" id="secondNumber" />
+    <input
+      type="number"
+      placeholder="Second number"
+      id="secondNumber"
+      onchange="debouncedPopulateDiv()"
+    />
     <br />
     <br />
-    <button onclick="populateDiv()">Calculate sum</button>
+    <!-- <button onclick="populateDiv()">Calculate sum</button>
     <br />
-    <br />
+    <br /> -->
     <div id="finalSum"></div>
   </body>
   <script>
+    let timeout;
+    function debouncedPopulateDiv() {
+      clearTimeout(timeout);
+      setTimeout(() => {
+        populateDiv();
+      }, 200);
+    }
     async function populateDiv() {
       const a = document.getElementById("firstNumber").value;
       const b = document.getElementById("secondNumber").value;
