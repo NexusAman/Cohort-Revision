@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interest Calculator</title>
+  </head>
+  <body>
+    <input
+      type="number"
+      placeholder="Enter Principal Amount"
+      id="principalAmount"
+    />
+    <br />
+    <br />
+    <input
+      type="number"
+      placeholder="Enter Rate"
+      id="rate"
+    />
+    <br />
+    <br />
+    <input
+      type="number"
+      placeholder="Enter Time"
+      id="time"
+    />
+    <br>
+    <br>
+    <button onclick="calculateInterest()">Calculate Interest</button>
+    <br>
+    <br>
+    <div id="totalAmount"></div>
+    <br />
+    <div id="interest"></div>
+  </body>
+  <script>
+    async function calculateInterest() {
+      const principal = parseInt(
+        document.getElementById("principalAmount").value,
+      );
+      const rate = parseInt(document.getElementById("rate").value);
+      const time = parseInt(document.getElementById("time").value);
+      const response = await fetch(
+        `http://localhost:3000/interest?principal=${principal}&rate=${rate}&time=${time}`,
+      );
+
+      const data =await response.json();
+
+      document.getElementById("totalAmount").innerHTML =
+        `Total Amount: ${data.total}`;
+      document.getElementById("interest").innerHTML =
+        `Interest: ${data.interest}`;
+    }
+  </script>
+</html>

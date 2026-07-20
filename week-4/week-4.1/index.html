@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+  </head>
+  <body>
+    <input type="number" placeholder="First number" id="firstNumber" />
+    <br />
+    <br />
+    <input type="number" placeholder="Second number" id="secondNumber" />
+    <br />
+    <br />
+    <button onclick="populateDiv()">Calculate sum</button>
+    <br />
+    <br />
+    <div id="finalSum"></div>
+  </body>
+  <script>
+    async function populateDiv() {
+      const a = document.getElementById("firstNumber").value;
+      const b = document.getElementById("secondNumber").value;
+
+      const response = await fetch(`http://localhost:3000/sum?a=${a}&b=${b}`);
+      const data = await response.text();
+
+      document.getElementById("finalSum").innerHTML = `Sum is ${data}`;
+    }
+  </script>
+</html>
