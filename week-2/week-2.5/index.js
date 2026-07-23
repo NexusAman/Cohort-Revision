@@ -9,7 +9,7 @@ const users = [
     name: "John",
     kidneys: [
       {
-        healthy: true,
+        healthy: false,
       },
       {
         healthy: true,
@@ -52,8 +52,8 @@ app.post("/", (req, res) => {
 
 app.put("/", (req, res) => {
   for (let i = 0; i < users[0].kidneys.length; i++) {
-    if (users[0].kidneys.healthy == false) {
-      users[0].kidneys.healthy = true;
+    if (users[0].kidneys[i].healthy == false) {
+      users[0].kidneys[i].healthy = true;
     }
   }
   res.json({
@@ -75,10 +75,10 @@ app.delete("/", (req, res) => {
     res.status(200).json({
       msg: "Deleted unhealthy kidneys successfully!",
     });
-  }else{
+  } else {
     res.status(411).json({
-        msg : "Your kidneys are already good!"
-    })
+      msg: "Your kidneys are already good!",
+    });
   }
 });
 
